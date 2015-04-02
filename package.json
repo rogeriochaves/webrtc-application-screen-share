@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/rogeriochaves/webrtc-application-screen-share",
   "dependencies": {
+    "express": "^4.12.3",
     "websocket": "^1.0.18"
   }
 }

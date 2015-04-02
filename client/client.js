@@ -1,7 +1,7 @@
 // detect server from URL
 var hostArray = window.location.host.split(':');
 var serverLoc = 'ws://' + hostArray[0] + ':1337/'
-var socket = new WebSocket(serverLoc); 
+var socket = new WebSocket(serverLoc);
 
 var shareVideo = document.getElementById('shareVideo');
 var shareVideoActive = false;
@@ -14,7 +14,7 @@ var mediaFlowing = false;
 var removeVP8Codec = document.getElementById('h264').checked;
 var pconns = {};
 var mediaConstraints = {'mandatory': {
-                        'OfferToReceiveAudio':true, 
+                        'OfferToReceiveAudio':true,
                         'OfferToReceiveVideo':true}};
 
 function handleRadioClick(myRadio) {
@@ -62,7 +62,7 @@ function successCallback(stream) {
     if (pconns[1]) {
       shuttingDown = false;
       pconns[1].addStream(localStream);
-      pconns[1].createOffer(setLocalDescAndSendMessagePC1Offer, errorCallback, mediaConstraints); 
+      pconns[1].createOffer(setLocalDescAndSendMessagePC1Offer, errorCallback, mediaConstraints);
     }
   }
 }
@@ -77,10 +77,10 @@ function playLocalvideo() {
         localvid.src = window.URL.createObjectURL(localStream);
         localvid.play();
       } catch(e) {
-        console.log("Error setting video src: ", e); 
-      }   
+        console.log("Error setting video src: ", e);
+      }
     }
-  }   
+  }
 }
 
 function errorCallback(error) {
@@ -98,10 +98,10 @@ function play() {
   remoteVideo.play();
 }
 
-// stop the connection on button click 
+// stop the connection on button click
 function disconnect() {
   shuttingDown = true;
-  console.log("disconnect()");    
+  console.log("disconnect()");
   socket.send(JSON.stringify({
                 "pc": 0,
                 "messageType": "bye"
@@ -110,7 +110,7 @@ function disconnect() {
 }
 
 function stop() {
-  console.log("stop()");    
+  console.log("stop()");
 
   stopMedia();
 
@@ -122,10 +122,10 @@ function stop() {
     pconns[1].close();
     pconns[1] = null;
   }
-  shareVideo.src = ""; 
-  remoteVideo.src = ""; 
+  shareVideo.src = "";
+  remoteVideo.src = "";
   localvid.src = "";
-  mediaFlowing = false;        
+  mediaFlowing = false;
   shareVideoActive = false;
   remoteVideoActive = false;
 }
@@ -180,7 +180,7 @@ function setLocalDescAndSendMessagePC1Answer(sessionDescription) {
 
   if (removeVP8Codec) {
     // Remove VP8 from offer every time, disabled for now
-    //sessionDescription.sdp = removeVP8(sessionDescription.sdp); 
+    //sessionDescription.sdp = removeVP8(sessionDescription.sdp);
     pconns[1].setLocalDescription(sessionDescription, setLocalDescSuccess, errorCallback);
   } else {
     pconns[1].setLocalDescription(sessionDescription, setLocalDescSuccess, errorCallback);
@@ -208,11 +208,11 @@ function setLocalDescAndSendMessagePC1Offer(sessionDescription) {
 
 function addCandidateSuccess() {
   console.log("addCandidate success");
-} 
+}
 
 socket.addEventListener("message", onWebSocketMessage, false);
 
-// process messages from web socket 
+// process messages from web socket
 function onWebSocketMessage(evt) {
   var message = JSON.parse(evt.data);
   var pcID = message.pc;
@@ -225,15 +225,15 @@ function onWebSocketMessage(evt) {
 
     mediaFlowing = true;
     console.log('Creating remote session description...' );
-   
-    var remoteDescription = message.peerDescription; 
+
+    var remoteDescription = message.peerDescription;
 
     if (removeVP8Codec) {
       console.log("offer before manipulation: " + remoteDescription.sdp);
       // Remove VP8 from offer every time
       remoteDescription.sdp = removeVP8(remoteDescription.sdp);
       console.log("offer after manipulation: " + remoteDescription.sdp);
-    }      
+    }
 
     var RTCSessionDescription = window.mozRTCSessionDescription || window.webkitRTCSessionDescription || window.RTCSessionDescription;
     pconns[pcID].setRemoteDescription(new RTCSessionDescription(remoteDescription), function() {
@@ -243,7 +243,7 @@ function onWebSocketMessage(evt) {
       else
         pconns[1].createAnswer(setLocalDescAndSendMessagePC1Answer, errorCallback, mediaConstraints);
 
-    }, errorCallback);  
+    }, errorCallback);
 
   } else if (message.messageType === "answer" && mediaFlowing) {
     var remoteDescription = message.peerDescription;
@@ -270,7 +270,7 @@ function onWebSocketMessage(evt) {
     if (!localStream) {
       startMedia();
     }
-    
+
     // automatically join
     socket.send(JSON.stringify({
                 "pc": 0,
@@ -298,16 +298,16 @@ function createPeerConnection(pcID) {
       socket.send(JSON.stringify({
                    "pc": pcID,
                    "messageType": "iceCandidate",
-                   "candidate": event.candidate 
-                  }));   
+                   "candidate": event.candidate
+                  }));
     } else {
       console.log("End of candidates");
     }
   };
-  
+
   if (pcID==1 && localStream)
-  { 
-    pconns[1].addStream(localStream); 
+  {
+    pconns[1].addStream(localStream);
   }
   pconns[pcID].addEventListener("addstream", onRemoteStreamAdded, false);
   pconns[pcID].addEventListener("removestream", onRemoteStreamRemoved, false);
@@ -326,8 +326,8 @@ function createPeerConnection(pcID) {
       remoteVideo.src = window.URL.createObjectURL(event.stream);
       remoteVideo.play();
       remoteVideoActive = true;
-      if (localStream) 
-       playLocalvideo(); 
+      if (localStream)
+       playLocalvideo();
     }
   }
 

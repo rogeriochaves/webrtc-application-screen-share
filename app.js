@@ -1,21 +1,15 @@
 // This is the node.js server application
 
 var WebSocketServer = require('websocket').server;
+var express = require('express');
 var http = require('http');
+var app = express();
 var fs = require('fs');
 var clients = [];
 
-var server = http.createServer(function(request, response) {
-  fs.readFile(__dirname + '/index.html',
-  function (err, data) {
-    if (err) {
-      response.writeHead(500);
-      return response.end('Error loading index.html');
-    }   
-    response.writeHead(200);
-    response.end(data);
-  }); 
-});
+app.use(express.static(__dirname + '/client'));
+
+server = http.createServer(app);
 
 server.listen(1337, function() {
   console.log((new Date()) + " Server is listening on port 1337");

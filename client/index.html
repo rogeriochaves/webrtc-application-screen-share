@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html>
 <head>
-  <title>WebRTC Screen \ Application Capture Demo</title>  
+  <title>WebRTC Screen \ Application Capture Demo</title>
 
-  <link rel="stylesheet" type="text/css" href="application.css">
+  <link rel="stylesheet" type="text/css" href="stylesheet.css">
 
 </head>
 <body>
@@ -12,12 +11,12 @@
   <h2 id="mainTitleH2">WebRTC Share, attendee console</h2>
   <div class="share-video-section">
     <h3 id="remoteIDH3"> Remote Share </h3>
-    <div class="radio">  
-        <input id="h264" type="radio" name="codec" onclick="handleRadioClick(this);" value="h264">  
-        <label for="h264">H.264</label>  
+    <div class="radio">
+        <input id="h264" type="radio" name="codec" onclick="handleRadioClick(this);" value="h264">
+        <label for="h264">H.264</label>
         <input id="vp8" type="radio" name="codec" onclick="handleRadioClick(this);" value="vp8" checked="checked">
         <label for="vp8">VP8</label><br><br>
-    </div>  
+    </div>
     <video class="video-win1" id="shareVideo" autoplay controls></video>
     <div class="video-section">
       <table>
@@ -40,10 +39,9 @@
             <button class="myButton" type="button" onclick="disconnect();">Disconnect</button>
           </td>
         </tr>
-      </table> 
+      </table>
   </div>
 
   <script type="text/javascript" src="client.js"></script>
 </body>
 </html>
-
