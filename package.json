@@ -1,0 +1,22 @@
+{
+  "name": "radiator-screen-share",
+  "version": "0.0.1",
+  "description": "Let the team share the screen on the radiator",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rogeriochaves/webrtc-application-screen-share.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rogeriochaves/webrtc-application-screen-share/issues"
+  },
+  "homepage": "https://github.com/rogeriochaves/webrtc-application-screen-share",
+  "dependencies": {
+    "websocket": "^1.0.18"
+  }
+}
