@@ -27,6 +27,7 @@ socket = new WebSocket(serverString);
 socket.addEventListener("message", onWebSocketMessage, false);
 
 function gotShareStream(stream) {
+  shareVideo.display = 'block';
   shareVideo.src = URL.createObjectURL(stream);
   shareStream = stream;
   share();
@@ -292,6 +293,7 @@ function stop() {
     videoStream = null;
     localVideo.src = "";
     remoteVideo.src = "";
+    remoteVideo.display = 'none';
   }
   if (shareStream) {
     shareStream.stop();
@@ -299,6 +301,7 @@ function stop() {
   }
   if (shareVideo) {
     shareVideo.src = "";
+    shareVideo.display = 'none';
   }
   shareFlowing = false;
   videoFlowing = false;
@@ -413,12 +416,14 @@ function createPeerConnection(pcID) {
       shareVideo.src = window.URL.createObjectURL(event.stream);
       shareVideo.play();
       shareVideoActive = true;
+      shareVideo.display = 'block';
        return;
     }
 
     if (!remoteVideoActive) {
       remoteVideo.src = window.URL.createObjectURL(event.stream);
       remoteVideo.play();
+      remoteVideo.display = 'block';
       remoteVideoActive = true;
     }
   }
@@ -426,5 +431,6 @@ function createPeerConnection(pcID) {
   function onRemoteStreamRemoved(event) {
     console.log("Remove remote stream");
     remoteVideo.src = "";
+    removeVideo.display = 'none';
   }
 }

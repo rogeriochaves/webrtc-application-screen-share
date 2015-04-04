@@ -17,3 +17,11 @@ body{
   top: 0;
   left: 0;
 }
+
+#remoteVideo{
+  width: 20%;
+  height: 20%;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}

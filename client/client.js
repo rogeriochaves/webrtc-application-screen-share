@@ -11,19 +11,10 @@ var localvid = document.getElementById('localVideo');
 var localStream = null;
 var shuttingDown = false;
 var mediaFlowing = false;
-var removeVP8Codec = document.getElementById('h264').checked;
 var pconns = {};
 var mediaConstraints = {'mandatory': {
                         'OfferToReceiveAudio':true,
                         'OfferToReceiveVideo':true}};
-
-function handleRadioClick(myRadio) {
-  if (myRadio.value == 'h264') {
-    removeVP8Codec = true;
-  } else {
-    removeVP8Codec = false;
-  }
-}
 
 window.onload = function() {
   startMedia();
@@ -173,13 +164,7 @@ function setLocalDescAndSendMessagePC0Answer(sessionDescription) {
 // send SDP over web socket
 function setLocalDescAndSendMessagePC1Answer(sessionDescription) {
 
-  if (removeVP8Codec) {
-    // Remove VP8 from offer every time, disabled for now
-    //sessionDescription.sdp = removeVP8(sessionDescription.sdp);
-    pconns[1].setLocalDescription(sessionDescription, setLocalDescSuccess, errorCallback);
-  } else {
-    pconns[1].setLocalDescription(sessionDescription, setLocalDescSuccess, errorCallback);
-  }
+  pconns[1].setLocalDescription(sessionDescription, setLocalDescSuccess, errorCallback);
   console.log("Sending: SDP");
   console.log(sessionDescription);
 
@@ -222,13 +207,6 @@ function onWebSocketMessage(evt) {
     console.log('Creating remote session description...' );
 
     var remoteDescription = message.peerDescription;
-
-    if (removeVP8Codec) {
-      console.log("offer before manipulation: " + remoteDescription.sdp);
-      // Remove VP8 from offer every time
-      remoteDescription.sdp = removeVP8(remoteDescription.sdp);
-      console.log("offer after manipulation: " + remoteDescription.sdp);
-    }
 
     var RTCSessionDescription = window.mozRTCSessionDescription || window.webkitRTCSessionDescription || window.RTCSessionDescription;
     pconns[pcID].setRemoteDescription(new RTCSessionDescription(remoteDescription), function() {
