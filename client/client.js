@@ -30,9 +30,8 @@ window.onload = function() {
 }
 
 function startMedia() {
-  navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || window.navigator.mozGetUserMedia || navigator.msGetUserMedia;
   window.URL = window.URL || window.webkitURL;
-  navigator.getUserMedia({video: true, audio: true}, successCallback, errorCallback);
+  successCallback();
 }
 
 function stopMedia() {
@@ -54,14 +53,10 @@ function stopMedia() {
   localStream = null;
 }
 
-function successCallback(stream) {
-  localStream = stream;
-  playLocalvideo();
-
+function successCallback() {
   if (mediaFlowing) {
     if (pconns[1]) {
       shuttingDown = false;
-      pconns[1].addStream(localStream);
       pconns[1].createOffer(setLocalDescAndSendMessagePC1Offer, errorCallback, mediaConstraints);
     }
   }

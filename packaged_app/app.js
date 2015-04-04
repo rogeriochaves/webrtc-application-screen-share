@@ -1,5 +1,5 @@
 // Replace with your server domain or ip address, or use configure button on app to set this
-var serverAddress = '192.168.1.5' ;
+var serverAddress = 'localhost' ;
 var socket = null;
 var shareVideo = null;
 var localVideo = null;
@@ -17,12 +17,12 @@ var pending_request_id = null;
 var pconns = {};
 
 var mediaConstraints = {'mandatory': {
-                        'OfferToReceiveAudio':true, 
+                        'OfferToReceiveAudio':true,
                         'OfferToReceiveVideo':true}};
 
 shareVideo = document.getElementById("shareVideo");
 
-var serverString = 'ws://' + serverAddress + ':1337';                                                                                                                                                                                       
+var serverString = 'ws://' + serverAddress + ':1337';
 socket = new WebSocket(serverString);
 socket.addEventListener("message", onWebSocketMessage, false);
 
@@ -102,11 +102,11 @@ document.querySelector('#configure').addEventListener('click', function(e) {
 });
 
 document.querySelector('#closeConfiguration').addEventListener('click', function(e) {
-  joinReceived = false; 
+  joinReceived = false;
   var overlay = document.getElementById("overlay");
   var popup = document.getElementById("popup");
   overlay.style.display = "none";
-  popup.style.display = "none"; 
+  popup.style.display = "none";
   removeVP8Codec = document.getElementById('h264').checked;
 
   if (document.getElementById('small').checked) {
@@ -118,7 +118,7 @@ document.querySelector('#closeConfiguration').addEventListener('click', function
   }
 
   serverAddress = document.getElementById("serverAddress").value;
-  serverString = 'ws://' + serverAddress + ':1337';                                                                                                                                                                                       
+  serverString = 'ws://' + serverAddress + ':1337';
   socket = new WebSocket(serverString);
   socket.addEventListener("message", onWebSocketMessage, false);
 });
@@ -149,7 +149,7 @@ function closeMeetingNotification() {
   var overlay = document.getElementById("overlayMedia");
   var popup = document.getElementById("popupMedia");
   overlay.style.display = "none";
-  popup.style.display = "none"; 
+  popup.style.display = "none";
 }
 
 function removeVP8(sdp) {
@@ -175,7 +175,7 @@ function removeVP8(sdp) {
   updated_sdp = updated_sdp.replace("a=rtcp-fb:121 nack\r\n","");
   updated_sdp = updated_sdp.replace("a=rtcp-fb:121 nack pli\r\n","");
   updated_sdp = updated_sdp.replace("a=rtcp-fb:121 goog-remb\r\n","");
-  
+
   console.log("SDP after manipulation: " + updated_sdp);
 
   return updated_sdp;
@@ -267,9 +267,9 @@ function connect() {
   }
 }
 
-// stop the connection on button click 
+// stop the connection on button click
 function disconnect() {
-  console.log("disconnect()");    
+  console.log("disconnect()");
   socket.send(JSON.stringify({
                 "pc": 0,
                 "messageType": "bye"
@@ -288,7 +288,7 @@ function stop() {
     pconns[1] = null;
   }
   if (videoStream) {
-    videoStream.stop(); 
+    videoStream.stop();
     videoStream = null;
     localVideo.src = "";
     remoteVideo.src = "";
@@ -299,7 +299,7 @@ function stop() {
   }
   if (shareVideo) {
     shareVideo.src = "";
-  } 
+  }
   shareFlowing = false;
   videoFlowing = false;
   isPresentor = false;
@@ -392,7 +392,7 @@ function createPeerConnection(pcID) {
                     "pc": pcID,
                     "messageType": "iceCandidate",
                     "candidate": evt.candidate
-                  }));   
+                  }));
     } else {
       console.log("End of candidates.");
     }
@@ -414,7 +414,7 @@ function createPeerConnection(pcID) {
       shareVideo.play();
       shareVideoActive = true;
        return;
-    }   
+    }
 
     if (!remoteVideoActive) {
       remoteVideo.src = window.URL.createObjectURL(event.stream);
