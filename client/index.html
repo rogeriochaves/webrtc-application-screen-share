@@ -8,7 +8,13 @@
 </head>
 <body>
 
-  <iframe id="radiator" class="fullscreen" src="http://example.org/"></iframe>
+	<h1>Radiator Screen Share</h1>
+
+	<label for="radiatorUrl">Radiator URL</label>
+	<input id="radiatorUrl" />
+	<input type="button" value="Ok" onclick="loadRadiator()" />
+
+  <iframe id="radiator" class="fullscreen"></iframe>
 
   <div class="share-video-section">
     <video class="video-win1 fullscreen" id="shareVideo" autoplay controls></video>

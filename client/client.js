@@ -7,6 +7,8 @@ var shareVideo = document.getElementById('shareVideo');
 var shareVideoActive = false;
 var remoteVideo = document.getElementById('remoteVideo');
 var remoteVideoActive = false;
+var radiator = document.getElementById('radiator');
+var radiatorUrl = document.getElementById('radiatorUrl');
 var localStream = null;
 var shuttingDown = false;
 var mediaFlowing = false;
@@ -17,6 +19,19 @@ var mediaConstraints = {'mandatory': {
 
 window.onload = function() {
   startMedia();
+
+  var savedUrl = localStorage.getItem('radiator-url');
+  if (savedUrl) {
+    radiatorUrl.value = savedUrl;
+  }
+}
+
+function loadRadiator(){
+  var url = radiatorUrl.value;
+
+  localStorage.setItem('radiator-url', url);
+  radiator.src = url;
+  radiator.style.display = 'block';
 }
 
 function startMedia() {
@@ -26,7 +41,7 @@ function startMedia() {
 
 function stopMedia() {
   if (mediaFlowing && !shuttingDown) {
-    if(pconns[1]) {
+    if (pconns[1]) {
       pconns[1].removeStream(localStream);
       pconns[1].createOffer(setLocalDescAndSendMessagePC1Offer, errorCallback, mediaConstraints);
     }

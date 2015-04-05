@@ -8,6 +8,11 @@ body{
   position: absolute;
   bottom: 0;
   right: 0;
+  display: none;
+}
+
+#radiatorUrl{
+  width: 200px;
 }
 
 #radiator{
@@ -15,12 +20,10 @@ body{
 }
 
 #shareVideo{
-  display: none;
   background: #000;
 }
 
 #remoteVideo{
   width: 20%;
   height: 20%;
-  display: none;
 }
