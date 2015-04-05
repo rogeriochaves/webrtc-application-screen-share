@@ -1,4 +1,4 @@
-webrtc-application-screen-share    
+webrtc-application-screen-share
 ===============================
 
 Capture the users screen or application and share over a WebRTC PeerConnection. This simple demo consists of a presenter who shares their screen or applications and an attendee who views that share video on a web page.  Audio and video will also be transmitted between both peers. The attendee can be either a Chrome or Firefox browser. The presenter must be using Chrome.  So right now this is a two user demo, one presentor and one attendee only.
@@ -24,10 +24,10 @@ function onAccessApproved(id) {
     console.log("Access rejected");
     return;
   }
-  navigator.webkitGetUserMedia({                                                                                                                                                                                                              
+  navigator.webkitGetUserMedia({
       audio: false,
       video: { mandatory: { chromeMediaSource: "desktop",
-                            chromeMediaSourceId: id, 
+                            chromeMediaSourceId: id,
                             maxWidth: screen.width,
                             maxHeight: screen.height,
                             minFrameRate: 1,
@@ -61,11 +61,11 @@ document.querySelector('#share').addEventListener('click', function(e) {
 - Click button 'Load unpacked extension'
 - Navigate to the packaged_app folder of this repo
 - Launch app by clicking 'launch' link in chrome://extensions
--  Or use Chrome App Launcher to launch it.
+- Or use Chrome App Launcher to launch it.
 
-####  Client Attendee Web Page Steps 
+####  Client Attendee Web Page Steps
 
 - Start Chrome or Firefox browser
-- Point browser to  e.g. http://\<your node.js ip address\>:1337
+- Point browser to  e.g. http://localhost:1337
 - You can test this on the same machine or across the network over two machines.
 

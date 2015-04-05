@@ -1,5 +1,5 @@
 // Replace with your server domain or ip address, or use configure button on app to set this
-var serverAddress = 'localhost';
+var serverAddress = 'localhost:1337';
 var socket = null;
 var shareVideo = null;
 var localVideo = null;
@@ -22,7 +22,7 @@ var mediaConstraints = {'mandatory': {
 
 shareVideo = document.getElementById("shareVideo");
 
-var serverString = 'ws://' + serverAddress + ':1337';
+var serverString = 'ws://' + serverAddress;
 socket = new WebSocket(serverString);
 socket.addEventListener("message", onWebSocketMessage, false);
 
@@ -118,7 +118,7 @@ document.querySelector('#closeConfiguration').addEventListener('click', function
   }
 
   serverAddress = document.getElementById("serverAddress").value;
-  serverString = 'ws://' + serverAddress + ':1337';
+  serverString = 'ws://' + serverAddress;
   socket = new WebSocket(serverString);
   socket.addEventListener("message", onWebSocketMessage, false);
 });

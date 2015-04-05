@@ -1,6 +1,6 @@
 // detect server from URL
 var hostArray = window.location.host.split(':');
-var serverLoc = 'ws://' + hostArray[0] + ':1337/'
+var serverLoc = 'ws://' + hostArray[0] + (hostArray[0] === 'localhost' ? ':1337/' + '/')
 var socket = new WebSocket(serverLoc);
 
 var shareVideo = document.getElementById('shareVideo');
