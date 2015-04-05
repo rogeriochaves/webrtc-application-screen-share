@@ -43,61 +43,61 @@
     top: 1px;
   }
   .overlay-div {
-    display: none;      
-    position: fixed;  
-    left: 0px;    
-    top: 0px;       
-    width: 100%;     
-    height: 100%;        
-    background: #000; 
-    opacity: 0.5;      
-    z-index: 99999;   
+    display: none;
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    opacity: 0.5;
+    z-index: 99999;
   }
   .popup-div {
     display: none;
     position: fixed;
-    left: 50%;    
-    top: 50%;        
-    width: 300px;     
+    left: 50%;
+    top: 50%;
+    width: 300px;
     height: 200px;
     margin-top: -75px;
     margin-left: -150px;
     background: #FFFFFF;
     border: 2px solid #000;
-    z-index: 100000;    
+    z-index: 100000;
   }
   .radio label:before {
-    border-radius: 8px;  
+    border-radius: 8px;
   }
-  label {  
-    display: inline-block;  
-    cursor: pointer;  
-    position: relative;  
-    padding-left: 25px;  
-    margin-right: 15px;  
-    font-size: 13px;  
+  label {
+    display: inline-block;
+    cursor: pointer;
+    position: relative;
+    padding-left: 25px;
+    margin-right: 15px;
+    font-size: 13px;
   }
-  input[type=radio] {  
-    display: none;  
+  input[type=radio] {
+    display: none;
   }
-  label:before {  
-    content: "";  
-    display: inline-block;  
-    width: 16px;  
-    height: 16px;  
-    margin-right: 10px;  
-    position: absolute;  
-    left: 0;  
-    bottombottom: 1px;  
-    background-color: #aaa;  
-    box-shadow: inset 0px 2px 3px 0px rgba(0, 0, 0, .3), 0px 1px 0px 0px rgba(255, 255, 255, .8);  
+  label:before {
+    content: "";
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    margin-right: 10px;
+    position: absolute;
+    left: 0;
+    bottombottom: 1px;
+    background-color: #aaa;
+    box-shadow: inset 0px 2px 3px 0px rgba(0, 0, 0, .3), 0px 1px 0px 0px rgba(255, 255, 255, .8);
   }
-  input[type=radio]:checked + label:before {  
-    content: "\2022";  
-    color: #f3f3f3;  
-    font-size: 30px;  
-    text-align: center;  
-    line-height: 18px;  
+  input[type=radio]:checked + label:before {
+    content: "\2022";
+    color: #f3f3f3;
+    font-size: 30px;
+    text-align: center;
+    line-height: 18px;
   }
   .table-header {
     text-align: center;
@@ -114,11 +114,11 @@
     text-align: center;
   }
   .server-label {
-    font-family: 
-    Helvetica Neue,Helvetica,Arial,sans-serif; 
-    font-size: 12px; 
-    font-style: normal; 
-    font-variant: normal; 
+    font-family:
+    Helvetica Neue,Helvetica,Arial,sans-serif;
+    font-size: 12px;
+    font-style: normal;
+    font-variant: normal;
     font-weight: 700;
   }
   .server-box {
@@ -128,12 +128,6 @@
 	width: 100px;
   }
   body {
-    background-image: url('sea.jpg');
-    background: url(sea.jpg) no-repeat center center fixed; 
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover; 
     display: -webkit-flex;
     -webkit-justify-content: center;
     -webkit-align-items: center;
@@ -160,7 +154,7 @@
   .outer-div {
     width: 1000px;
     border-color: #000000;
-    background: white; 
+    background: white;
     margin: 0 auto;
     border-size: 1px;
     border-style: solid;
@@ -207,25 +201,25 @@
             <button class="myButton" id="cancel">Cancel</button>
           </td>
         </tr>
-      </table> 
+      </table>
     </div>
     <div class="overlay-div" id="overlay"></div>
     <div class="popup-div" id="popup">
-      <div class="radio">  
+      <div class="radio">
         <br>
-        <input id="vp8" type="radio" name="codec" onclick="handleRadioClick(this);" value="vp8" checked="checked"> 
+        <input id="vp8" type="radio" name="codec" onclick="handleRadioClick(this);" value="vp8" checked="checked">
         <label for="vp8"> VP8</label>
-        <input id="h264" type="radio" name="codec" onclick="handleRadioClick(this);" value="h264">  
-        <label for="h264"> H.264</label><br><br>  
+        <input id="h264" type="radio" name="codec" onclick="handleRadioClick(this);" value="h264">
+        <label for="h264"> H.264</label><br><br>
       </div>
-      <div class="radio">  
+      <div class="radio">
         <br>
-        <input id="small" type="radio" name="size" onclick="handleRadioClick(this);" value="small" checked="checked"> 
+        <input id="small" type="radio" name="size" onclick="handleRadioClick(this);" value="small" checked="checked">
         <label for="small"> small</label>
-        <input id="medium" type="radio" name="size" onclick="handleRadioClick(this);" value="medium">  
+        <input id="medium" type="radio" name="size" onclick="handleRadioClick(this);" value="medium">
         <label for="medium"> medium</label>
-        <input id="large" type="radio" name="size" onclick="handleRadioClick(this);" value="large">  
-        <label for="large"> large</label><br><br>  
+        <input id="large" type="radio" name="size" onclick="handleRadioClick(this);" value="large">
+        <label for="large"> large</label><br><br>
       </div>
       <form>
         <label class="server-label">  Server Address </label><input class="server-box" id="serverAddress" size="15" type="text"/><br><br>
