@@ -11,8 +11,9 @@ app.use(express.static(__dirname + '/client'));
 
 server = http.createServer(app);
 
-server.listen(1337, function() {
-  console.log((new Date()) + " Server is listening on port 1337");
+var port = process.env.PORT || 1337;
+server.listen(port, function() {
+  console.log((new Date()) + " Server is listening on port " + port);
 });
 
 // create the server
