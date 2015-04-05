@@ -31,7 +31,7 @@ wsServer.on('request', function(request) {
   var connection = request.accept(null, request.origin);
   console.log(' Connection ' + connection.remoteAddress);
   clients.push(connection);
-    
+
   // This is the most important callback for us, we'll handle
   // all messages from users here.
   connection.on('message', function(message) {
@@ -46,10 +46,19 @@ wsServer.on('request', function(request) {
       });
     }
   });
-    
+
   connection.on('close', function(connection) {
+
+    clients.forEach(function (outputConnection) {
+      if (outputConnection != connection) {
+        outputConnection.send(JSON.stringify({
+          "pc": 0,
+          "messageType": "bye"
+        }));
+      }
+    });
     // close user connection
-    console.log((new Date()) + " Peer disconnected.");        
+    console.log((new Date()) + " Peer disconnected.");
   });
 });
 

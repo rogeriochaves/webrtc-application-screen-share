@@ -7,7 +7,6 @@ var shareVideo = document.getElementById('shareVideo');
 var shareVideoActive = false;
 var remoteVideo = document.getElementById('remoteVideo');
 var remoteVideoActive = false;
-var localvid = document.getElementById('localVideo');
 var localStream = null;
 var shuttingDown = false;
 var mediaFlowing = false;
@@ -26,15 +25,6 @@ function startMedia() {
 }
 
 function stopMedia() {
-  if (localvid.mozSrcObject) {
-    localvid.mozSrcObject.stop();
-    localvid.src = null;
-  } else {
-    localvid.src = "";
-    if (localStream)
-      localStream.stop();
-  }
-
   if (mediaFlowing && !shuttingDown) {
     if(pconns[1]) {
       pconns[1].removeStream(localStream);
@@ -49,22 +39,6 @@ function successCallback() {
     if (pconns[1]) {
       shuttingDown = false;
       pconns[1].createOffer(setLocalDescAndSendMessagePC1Offer, errorCallback, mediaConstraints);
-    }
-  }
-}
-
-function playLocalvideo() {
-  if (localStream) {
-    if (localvid.mozSrcObject) {
-      localvid.mozSrcObject = localStream;
-      localvid.play();
-    } else {
-      try {
-        localvid.src = window.URL.createObjectURL(localStream);
-        localvid.play();
-      } catch(e) {
-        console.log("Error setting video src: ", e);
-      }
     }
   }
 }
@@ -109,8 +83,9 @@ function stop() {
     pconns[1] = null;
   }
   shareVideo.src = "";
+  shareVideo.style.display = "none";
   remoteVideo.src = "";
-  localvid.src = "";
+  remoteVideo.style.display = "none";
   mediaFlowing = false;
   shareVideoActive = false;
   remoteVideoActive = false;
@@ -290,6 +265,7 @@ function createPeerConnection(pcID) {
 
     if (!shareVideoActive) {
       shareVideo.src = window.URL.createObjectURL(event.stream);
+      shareVideo.style.display = "block";
       shareVideo.play();
       shareVideoActive = true;
       return;
@@ -297,16 +273,17 @@ function createPeerConnection(pcID) {
 
     if (!remoteVideoActive) {
       remoteVideo.src = window.URL.createObjectURL(event.stream);
+      remoteVideo.style.display = "block";
       remoteVideo.play();
       remoteVideoActive = true;
-      if (localStream)
-       playLocalvideo();
     }
   }
 
   function onRemoteStreamRemoved(event) {
     console.log("Remove remote stream");
     shareVideo.src = "";
+    shareVideo.style.display = "none";
     remoteVideo.src = "";
+    remoteVideo.style.display = "none";
   }
 }
